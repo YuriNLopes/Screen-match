@@ -3,17 +3,29 @@ package com.example.curso.screen_match.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import org.hibernate.annotations.ManyToAny;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+
+@Entity
+@Table(name ="episodios")
 public class Episodio {
+
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
             private Integer Temporada;
             private String titulo;
             private Integer numeroEpisodio;
             private Double avaliacao;
             private LocalDate dataLancamento;
+
+            @ManyToOne
+            private Serie serie;
+            public Episodio(){}
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.Temporada = numeroTemporada;
@@ -82,5 +94,9 @@ public class Episodio {
                 ", numeroEpisodio=" + numeroEpisodio +
                 ", avaliacao=" + avaliacao +
                 ", dataLancamento=" + dataLancamento;
+    }
+
+    public void setSerie(Serie serie) {
+                this.serie = serie;
     }
 }

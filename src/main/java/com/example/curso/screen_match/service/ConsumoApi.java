@@ -23,6 +23,8 @@ public class ConsumoApi {
             throw new RuntimeException(e);
         }
 
+        System.out.println(response);
+
         String json = response.body();
         return json;
     }
